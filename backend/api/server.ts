@@ -15,7 +15,7 @@ app.get("/", (_req, res) => {
     </head>
     <body>
         <h1>Welcome to the Virtual Medical Site backend</h1>
-        <p>Version: <strong>1.0</strong></p>
+        <p>Version: <strong>1.1</strong></p>
     </body>
     </html>
   `);
