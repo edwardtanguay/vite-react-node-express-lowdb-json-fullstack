@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	h1 {
+		font-variant: small-caps;
+	}
+}
+
+a.active {
+	color: rgb(232, 232, 141);
+}
