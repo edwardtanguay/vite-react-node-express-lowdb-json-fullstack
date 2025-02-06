@@ -6,7 +6,7 @@ import {
 	Flashcard,
 	NewFlashcard,
 	PatchFlashcard,
-} from "../../types";
+} from "../../../share/types";
 import * as tools from "../tools";
 
 const projectBasePath = process.cwd();

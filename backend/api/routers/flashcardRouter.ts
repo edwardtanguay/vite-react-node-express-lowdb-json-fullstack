@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as flashcardHandler from "../handlers/flashcardHandlers";
-import { Flashcard, NewFlashcard, PatchFlashcard } from "../../types";
+import { Flashcard, NewFlashcard, PatchFlashcard } from "../../../share/types";
 
 export const flashcardRouter = Router();
 
@@ -10,8 +10,7 @@ flashcardRouter.get("/", (_req, res) => {
 
 flashcardRouter.get("/:suuid", (req, res) => {
 	const suuid = req.params.suuid;
-	const flashcard: Flashcard | null =
-		flashcardHandler.getOneFlashcard(suuid);
+	const flashcard: Flashcard | null = flashcardHandler.getOneFlashcard(suuid);
 	if (flashcard) {
 		res.json(flashcard);
 	} else {
