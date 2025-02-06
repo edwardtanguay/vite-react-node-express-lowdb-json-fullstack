@@ -1,3 +1,3 @@
-export const getPort = () => {
+export const getBackendPort = () => {
 	return 3300;
-}
+};
