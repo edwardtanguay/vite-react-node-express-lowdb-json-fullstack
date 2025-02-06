@@ -23,7 +23,7 @@ export const FlashcardArea = () => {
 			</h2>
 			{frontendFlashcards.map((ff) => {
 				return (
-					<div className="mb-4">
+					<div className="mb-4 w-full md:w-[35rem]">
 						<div
 							className="bg-slate-600 text-slate-200 p-2 rounded-t cursor-pointer"
 							onClick={() => handleToggleFrontendFlashcard(ff)}
