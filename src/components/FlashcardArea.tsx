@@ -23,8 +23,16 @@ export const FlashcardArea = () => {
 							{ff.front}
 						</div>
 						{ff.isOpen && (
-							<div className="bg-slate-300 p-2 rounded-b font-mono text-orange-800 text-sm">
-								{ff.back}
+							<div className="bg-slate-300 p-2 rounded-b flex justify-between items-center">
+								<p className="font-mono text-orange-800 text-sm">
+									{ff.back}
+								</p>
+								<button
+									className="btn-small"
+									onClick={() => alert("clicked")}
+								>
+									Delete
+								</button>
 							</div>
 						)}
 					</div>
