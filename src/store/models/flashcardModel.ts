@@ -6,15 +6,22 @@ import { StoreModel } from "../store";
 export interface FlashcardModel {
 	// state
 	frontendFlashcards: FrontendFlashcard[];
+	numberOfAnswersShown: number;
 
 	// actions
 	setFrontendFlashcards: Action<this, FrontendFlashcard[]>;
 	saveFrontendFlashcard: Action<this, FrontendFlashcard>;
 	deleteFrontendFlashcard: Action<this, FrontendFlashcard>;
+	incrementAnswersShown: Action<this>;
 
 	// thunks
 	loadFlashcardsThunk: Thunk<this>;
-	toggleFrontendFlashcardThunk: Thunk<this, FrontendFlashcard>;
+	toggleFrontendFlashcardThunk: Thunk<
+		this,
+		FrontendFlashcard,
+		void,
+		StoreModel
+	>;
 	deleteFlashcardFromDatasourceThunk: Thunk<
 		this,
 		FrontendFlashcard,
@@ -26,6 +33,7 @@ export interface FlashcardModel {
 export const flashcardModel: FlashcardModel = {
 	// state
 	frontendFlashcards: [],
+	numberOfAnswersShown: 0,
 
 	// actions
 	setFrontendFlashcards: action((state, flashcards) => {
@@ -48,6 +56,9 @@ export const flashcardModel: FlashcardModel = {
 			state.frontendFlashcards.splice(index, 1);
 		}
 	}),
+	incrementAnswersShown: action((state) => {
+		state.numberOfAnswersShown++;
+	}),
 
 	// thunks
 	loadFlashcardsThunk: thunk((actions) => {
@@ -56,10 +67,22 @@ export const flashcardModel: FlashcardModel = {
 			actions.setFrontendFlashcards(_frontendFlashcards);
 		})();
 	}),
-	toggleFrontendFlashcardThunk: thunk((actions, frontendFlashcard) => {
-		frontendFlashcard.isOpen = !frontendFlashcard.isOpen;
-		actions.saveFrontendFlashcard(frontendFlashcard);
-	}),
+	toggleFrontendFlashcardThunk: thunk(
+		(actions, frontendFlashcard, helpers) => {
+			frontendFlashcard.isOpen = !frontendFlashcard.isOpen;
+			if (frontendFlashcard.isOpen) {
+				actions.incrementAnswersShown();
+				helpers
+					.getStoreActions()
+					.mainModel.setMessage(
+						`Number of answers shown: ${
+							helpers.getState().numberOfAnswersShown
+						}`
+					);
+			}
+			actions.saveFrontendFlashcard(frontendFlashcard);
+		}
+	),
 	deleteFlashcardFromDatasourceThunk: thunk(
 		async (actions, frontendFlashcard, helpers) => {
 			try {
@@ -78,7 +101,11 @@ export const flashcardModel: FlashcardModel = {
 					console.log(dataModelResponse.message);
 				}
 			} catch (e: unknown) {
-					helpers.getStoreActions().mainModel.setMessage(`ERROR: flashcard ${frontendFlashcard.suuid} could not be deleted`);
+				helpers
+					.getStoreActions()
+					.mainModel.setMessage(
+						`ERROR: flashcard ${frontendFlashcard.suuid} could not be deleted`
+					);
 				console.error((e as Error).message, e);
 			}
 		}
