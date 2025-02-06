@@ -12,16 +12,17 @@ export const getFlashcards = async () => {
 					const _fetchedFlashcards: unknown[] = response.data;
 					const _frontendFlashcards: FrontendFlashcard[] = [];
 					for (const _fetchedFlashcard of _fetchedFlashcards) {
-						const parseResult = FlashcardSchema.safeParse(_fetchedFlashcard);
+						const parseResult =
+							FlashcardSchema.safeParse(_fetchedFlashcard);
 						if (parseResult.success) {
-							const {suuid, category, front, back} =
+							const { suuid, category, front, back } =
 								parseResult.data;
 							const _frontendFlashcard: FrontendFlashcard = {
 								suuid: suuid.trim(),
 								category: category.trim(),
 								front: front.trim(),
 								back: back.trim(),
-								isOpen: false
+								isOpen: false,
 							};
 							_frontendFlashcards.push(_frontendFlashcard);
 						} else {
@@ -42,8 +43,10 @@ export const getFlashcards = async () => {
 					resolve(_frontendFlashcards);
 				}
 			} catch (e: unknown) {
-				reject(`ERROR: ${(e as Error).message}`);
+				reject(new Error(`ERROR: ${(e as Error).message}`));
 			}
 		})();
 	});
 };
+
+export const deleteFlashcard = async () => {};
