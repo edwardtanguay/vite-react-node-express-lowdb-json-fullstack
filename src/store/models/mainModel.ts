@@ -1,9 +1,12 @@
-import { thunk, Thunk } from "easy-peasy";
+import { action, Action, thunk, Thunk } from "easy-peasy";
 import { StoreModel } from "../store";
 
 export interface MainModel {
 	// state
 	message: string;
+
+	// actions
+	setMessage: Action<this, string>;
 
 	// thunks
 	initialize: Thunk<this, void, void, StoreModel>;
@@ -11,10 +14,17 @@ export interface MainModel {
 
 export const mainModel: MainModel = {
 	// state
-	message: 'This is the welcome page.',
+	message: '',
+
+	// actions
+	setMessage: action((state, message) => {
+		state.message = message;
+	}),
 
 	// thunks
-	initialize: thunk((_, __, { getStoreActions }) => {
-		getStoreActions().flashcardModel.loadFlashcardsThunk()
+	initialize: thunk((actions, _, helpers) => {
+		actions.setMessage('This is the welcome page.');
+		helpers.getStoreActions().flashcardModel.loadFlashcardsThunk()
+
 	}),
 };

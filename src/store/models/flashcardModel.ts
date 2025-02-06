@@ -1,6 +1,7 @@
 import { action, Action, thunk, Thunk } from "easy-peasy";
 import { FrontendFlashcard } from "../../../share/types";
 import * as dataModel from "../dataModel";
+import { StoreModel } from "../store";
 
 export interface FlashcardModel {
 	// state
@@ -14,7 +15,12 @@ export interface FlashcardModel {
 	// thunks
 	loadFlashcardsThunk: Thunk<this>;
 	toggleFrontendFlashcardThunk: Thunk<this, FrontendFlashcard>;
-	deleteFlashcardFromDatasourceThunk: Thunk<this, FrontendFlashcard>;
+	deleteFlashcardFromDatasourceThunk: Thunk<
+		this,
+		FrontendFlashcard,
+		void,
+		StoreModel
+	>;
 }
 
 export const flashcardModel: FlashcardModel = {
@@ -55,16 +61,15 @@ export const flashcardModel: FlashcardModel = {
 		actions.saveFrontendFlashcard(frontendFlashcard);
 	}),
 	deleteFlashcardFromDatasourceThunk: thunk(
-		async (actions, frontendFlashcard) => {
+		async (actions, frontendFlashcard, helpers) => {
 			try {
 				const dataModelResponse = await dataModel.deleteFlashcard(
 					frontendFlashcard.suuid
 				);
 				if (dataModelResponse.success) {
+					helpers.getStoreActions().mainModel.setMessage(dataModelResponse.message)
 					actions.deleteFrontendFlashcard(frontendFlashcard);
-					console.log(dataModelResponse.message);
 				} else {
-					console.error(dataModelResponse.message);
 					// display message to user
 				}
 			} catch (e: unknown) {
