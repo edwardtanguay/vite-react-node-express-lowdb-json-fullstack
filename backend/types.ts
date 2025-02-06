@@ -1,19 +1,15 @@
-export interface INewFlashcard {
+export type NewFlashcard = {
 	category: string;
 	front: string;
 	back: string;
-}
+};
 
-export interface IFlashcard extends INewFlashcard {
+export type Flashcard = NewFlashcard & {
 	suuid: string;
-}
+};
 
-export interface IPatchFlashcard {
-	category?: string;
-	front?: string;
-	back?: string;
-}
+export type PatchFlashcard = Partial<NewFlashcard>;
 
-export interface IDatabase {
-	flashcards: IFlashcard[]
-}
+export type Database = {
+	flashcards: Flashcard[];
+};

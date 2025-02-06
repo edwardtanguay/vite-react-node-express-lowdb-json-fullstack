@@ -2,17 +2,17 @@ import { join } from "path";
 import { JSONFile } from "lowdb/node";
 import { Low } from "lowdb";
 import {
-	IDatabase,
-	IFlashcard,
-	INewFlashcard,
-	IPatchFlashcard,
+	Database,
+	Flashcard,
+	NewFlashcard,
+	PatchFlashcard,
 } from "../../types";
 import * as tools from "../tools";
 
 const projectBasePath = process.cwd();
 const dbPathAndFileName = join(projectBasePath, "backend/data/db.json");
-const adapter = new JSONFile<IDatabase>(dbPathAndFileName);
-const db: Low<IDatabase> = new Low<IDatabase>(adapter, {} as IDatabase);
+const adapter = new JSONFile<Database>(dbPathAndFileName);
+const db: Low<Database> = new Low<Database>(adapter, {} as Database);
 await db.read();
 
 export const getAllFlashcards = () => {
@@ -28,8 +28,8 @@ export const getOneFlashcard = (suuid: string) => {
 	}
 };
 
-export const createFlashcard = async (newFlashcard: INewFlashcard) => {
-	const flashcard: IFlashcard = {
+export const createFlashcard = async (newFlashcard: NewFlashcard) => {
+	const flashcard: Flashcard = {
 		...newFlashcard,
 		suuid: tools.generateSuuid(),
 	};
@@ -41,9 +41,9 @@ export const createFlashcard = async (newFlashcard: INewFlashcard) => {
 
 export const replaceFlashcard = async (
 	suuid: string,
-	newFlashcard: INewFlashcard
+	newFlashcard: NewFlashcard
 ) => {
-	const flashcard: IFlashcard | undefined = db.data.flashcards.find(
+	const flashcard: Flashcard | undefined = db.data.flashcards.find(
 		(m) => m.suuid === suuid
 	);
 	if (flashcard) {
@@ -59,9 +59,9 @@ export const replaceFlashcard = async (
 
 export const replaceSomeFieldsInFlashcard = async (
 	suuid: string,
-	patchFlashcard: IPatchFlashcard
+	patchFlashcard: PatchFlashcard
 ) => {
-	const flashcard: IFlashcard | undefined = db.data.flashcards.find(
+	const flashcard: Flashcard | undefined = db.data.flashcards.find(
 		(m) => m.suuid === suuid
 	);
 	if (flashcard) {
