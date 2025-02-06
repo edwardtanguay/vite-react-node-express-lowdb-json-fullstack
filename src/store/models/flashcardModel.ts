@@ -8,6 +8,7 @@ export interface FlashcardModel {
 
 	// actions
 	setFrontendFlashcards: Action<this, FrontendFlashcard[]>;
+	saveFrontendFlashcard: Action<this, FrontendFlashcard>;
 
 	// thunks
 	loadFlashcardsThunk: Thunk<this>;
@@ -20,6 +21,12 @@ export const flashcardModel: FlashcardModel = {
 	// actions
 	setFrontendFlashcards: action((state, flashcards) => {
 		state.frontendFlashcards = structuredClone(flashcards);
+	}),
+	saveFrontendFlashcard: action((state, frontendFlashcard) => {
+		const index = state.frontendFlashcards.findIndex((s) => s.suuid === frontendFlashcard.suuid);
+		if (index !== -1) {
+			state.frontendFlashcards[index] = structuredClone(frontendFlashcard);
+		}
 	}),
 
 	// thunks
