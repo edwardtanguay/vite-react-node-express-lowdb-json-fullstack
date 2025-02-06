@@ -1,4 +1,4 @@
-# vite-react-node-express-fullstack
+# vite-react-node-express-lowdb-json-fullstack
 
 This is a fullstack React/Node/Express/lowdb-json application that runs in one directory, useful for local development tools or internal applications.
 
