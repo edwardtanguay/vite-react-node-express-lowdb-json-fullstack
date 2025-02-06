@@ -78,7 +78,8 @@ export const flashcardModel: FlashcardModel = {
 					console.log(dataModelResponse.message);
 				}
 			} catch (e: unknown) {
-				console.error((e as Error).message);
+					helpers.getStoreActions().mainModel.setMessage(`ERROR: flashcard ${frontendFlashcard.suuid} could not be deleted`);
+				console.error((e as Error).message, e);
 			}
 		}
 	),
