@@ -1,9 +1,9 @@
-export interface MainModel {
+export interface FlashcardModel {
 	// state
 	message: string;
 }
 
-export const mainModel: MainModel = {
+export const flashcardModel: FlashcardModel = {
 	// state
 	message: 'This is the welcome page.'
 };
