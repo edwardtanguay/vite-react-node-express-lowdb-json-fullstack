@@ -1,13 +1,14 @@
 import axios from "axios";
 import { FlashcardSchema, FrontendFlashcard } from "../../share/types";
 import { DataModelResponse } from "./types";
+import * as config from '../../share/config';
 
 export const getFlashcards = async () => {
 	return new Promise<FrontendFlashcard[]>((resolve, reject) => {
 		(async () => {
 			try {
 				const response = await axios.get(
-					"http://localhost:3300/api/flashcards"
+					`http://localhost:${config.getBackendPort()}/api/flashcards`
 				);
 				if (response.status === 200) {
 					const _fetchedFlashcards: unknown[] = response.data;
@@ -55,7 +56,7 @@ export const deleteFlashcard = async (suuid: string) => {
 		(async () => {
 			try {
 				const response = await axios.delete(
-					`http://localhost:3300/api/flashcards/${suuid}`
+					`http://localhost:${config.getBackendPort()}/api/flashcards/${suuid}`
 				);
 				if (response.status === 200) {
 					resolve({

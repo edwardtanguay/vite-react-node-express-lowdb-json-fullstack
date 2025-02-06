@@ -26,7 +26,8 @@
 		"src",
 		"backend",
 		"dev/index copy.ts",
-		"share/types.ts"
+		"share/types.ts",
+		"share/config.ts"
 	],
 	"references": [
 		{

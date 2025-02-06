@@ -18,7 +18,7 @@
 ## setup
 
 -   `npm i`
--   `npm run dev`
+-   `npm run dev` (starts both backend and frontend)
 
 
 ## easy-peasy Redux
