@@ -26,10 +26,3 @@ export const PatchFlashcardSchema = NewFlashcardSchema.partial();
 
 export type PatchFlashcard = z.infer<typeof PatchFlashcardSchema>;
 
-export const DatabaseSchema = z.object({
-	flashcards: z.array(FlashcardSchema),
-});
-
-export type Database = {
-	flashcards: Flashcard[];
-};

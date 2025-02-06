@@ -2,12 +2,12 @@ import { join } from "path";
 import { JSONFile } from "lowdb/node";
 import { Low } from "lowdb";
 import {
-	Database,
 	Flashcard,
 	NewFlashcard,
 	PatchFlashcard,
 } from "../../../share/types";
 import * as tools from "../tools";
+import { Database } from "../types";
 
 const projectBasePath = process.cwd();
 const dbPathAndFileName = join(projectBasePath, "backend/data/db.json");
