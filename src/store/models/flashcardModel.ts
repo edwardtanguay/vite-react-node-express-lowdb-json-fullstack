@@ -1,5 +1,6 @@
 import { action, Action, thunk, Thunk } from "easy-peasy";
 import { Flashcard } from "../../../share/types";
+import * as dataModel from "../dataModel";
 
 export interface FlashcardModel {
 	// state
@@ -23,30 +24,9 @@ export const flashcardModel: FlashcardModel = {
 
 	// thunks
 	loadFlashcardsThunk: thunk((actions) => {
-		// (async () => {
-		// 	const _skills = await dataModel.getSkills();
-		// 	actions.setSkills(_skills);
-		// })();
-
-		actions.setFlashcards([
-			{
-				suuid: "mock01",
-				category: "git",
-				front: "show commit history with hash, title, author",
-				back: 'git log --pretty=format:"%h - %s - %an" ',
-			},
-			{
-				suuid: "mock02",
-				category: "linux",
-				front: "navigate to the home directory",
-				back: "cd ~",
-			},
-			{
-				suuid: "mock03",
-				category: "linux",
-				front: "navigate to the home directory",
-				back: "cd ~",
-			},
-		]);
+		(async () => {
+			const _flashcards = await dataModel.getFlashcards();
+			actions.setFlashcards(_flashcards);
+		})();
 	}),
 };
