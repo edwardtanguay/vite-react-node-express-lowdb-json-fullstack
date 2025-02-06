@@ -5,11 +5,13 @@ This is a fullstack React/Node/Express/lowdb-json application that runs in one d
 ## frontend
 
 -   Vite React
--   TypeScript
+-   TypeScript - types shared between frontend and backend
 -   React Router 6.4 with createBrowserRouter
 -   easy-peasy Redux (state management)
 -   Zod (validation)
 -   Tailwind, Sass
+-   nodemon (hot reloading)
+-   concurrently (runs backend/frontend with one command)
 -   ESLint/Prettier
 -   responsive
 
@@ -17,7 +19,7 @@ This is a fullstack React/Node/Express/lowdb-json application that runs in one d
 
 -   Node/Express
 -   TypeScript
--   lowdb/JSON (datasource)
+-   lowdb with db.json (datasource)
 
 ## setup
 
