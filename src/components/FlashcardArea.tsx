@@ -14,7 +14,7 @@ export const FlashcardArea = () => {
 			</h2>
 			{frontendFlashcards.map((ff) => {
 				return (
-					<div className="mb-4 w-full md:w-[35rem]">
+					<div className="mb-4 w-full md:w-[35rem]" key={ff.suuid}>
 						<div
 							className="bg-slate-600 text-slate-200 p-2 rounded-t cursor-pointer"
 							onClick={() => toggleFrontendFlashcardThunk(ff)}
@@ -28,7 +28,9 @@ export const FlashcardArea = () => {
 								</p>
 								<button
 									className="btn-small"
-									onClick={() => deleteFlashcardFromDatasourceThunk(ff)}
+									onClick={() =>
+										deleteFlashcardFromDatasourceThunk(ff)
+									}
 								>
 									Delete
 								</button>

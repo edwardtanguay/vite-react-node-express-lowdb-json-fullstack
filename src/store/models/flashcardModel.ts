@@ -55,22 +55,27 @@ export const flashcardModel: FlashcardModel = {
 		frontendFlashcard.isOpen = !frontendFlashcard.isOpen;
 		actions.saveFrontendFlashcard(frontendFlashcard);
 	}),
-	deleteFlashcardFromDatasourceThunk: thunk((actions, frontendFlashcard) => {
-		try {
-			(async () => {
+	deleteFlashcardFromDatasourceThunk: thunk(
+		async (actions, frontendFlashcard) => {
+			try {
 				const response = await axios.delete(
 					`http://localhost:3300/api/flashcards/${frontendFlashcard.suuid}`
 				);
-
 				if (response.status === 200) {
 					actions.deleteFrontendFlashcard(frontendFlashcard);
-					console.log(`flashcard ${frontendFlashcard.suuid} deleted successfully`);
+					console.log(
+						`flashcard ${frontendFlashcard.suuid} deleted successfully`
+					);
 				} else {
-					console.error(`failed to delete flashcard ${frontendFlashcard.suuid}`);
+					console.error(
+						`failed to delete flashcard ${frontendFlashcard.suuid}`
+					);
 				}
-			})();
-		} catch (error) {
-			console.error(`Error deleting flashcard ${frontendFlashcard.suuid}:`, error);
+			} catch (error) {
+				console.error(
+					`failed to delete flashcard ${frontendFlashcard.suuid}`
+				);
+			}
 		}
-	}),
+	),
 };
