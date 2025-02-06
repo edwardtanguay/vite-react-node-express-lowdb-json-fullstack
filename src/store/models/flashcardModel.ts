@@ -67,10 +67,15 @@ export const flashcardModel: FlashcardModel = {
 					frontendFlashcard.suuid
 				);
 				if (dataModelResponse.success) {
-					helpers.getStoreActions().mainModel.setMessage(dataModelResponse.message)
+					helpers
+						.getStoreActions()
+						.mainModel.setMessage(dataModelResponse.message);
 					actions.deleteFrontendFlashcard(frontendFlashcard);
 				} else {
-					// display message to user
+					helpers
+						.getStoreActions()
+						.mainModel.setMessage(dataModelResponse.message);
+					console.log(dataModelResponse.message);
 				}
 			} catch (e: unknown) {
 				console.error((e as Error).message);
