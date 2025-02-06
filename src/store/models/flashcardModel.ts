@@ -41,6 +41,12 @@ export const flashcardModel: FlashcardModel = {
 				front: "navigate to the home directory",
 				back: "cd ~",
 			},
+			{
+				suuid: "mock03",
+				category: "linux",
+				front: "navigate to the home directory",
+				back: "cd ~",
+			},
 		]);
 	}),
 };
