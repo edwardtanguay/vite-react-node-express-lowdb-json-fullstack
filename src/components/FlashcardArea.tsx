@@ -7,10 +7,17 @@ export const FlashcardArea = () => {
 
 	return (
 		<div>
-			<h2 className="text-xl mb-2">
+			<h2 className="text-xl mb-3">
 				There are {frontendFlashcards.length} flashcards:{" "}
 			</h2>
-			{frontendFlashcards.length} flashcards
+			{frontendFlashcards.map((ff) => {
+				return (
+					<div className="mb-4">
+						<div className="bg-slate-600 text-slate-200 p-2 rounded-t">{ff.front}</div>
+						<div className="bg-slate-300 p-2 rounded-b font-mono text-orange-800 text-sm">{ff.back}</div>
+					</div>
+				);
+			})}
 		</div>
 	);
 };
