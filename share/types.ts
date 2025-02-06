@@ -9,7 +9,10 @@ export const NewFlashcardSchema = z.object({
 export type NewFlashcard = z.infer<typeof NewFlashcardSchema>;
 
 export const FlashcardSchema = NewFlashcardSchema.extend({
-	suuid: z.string(),
+	suuid: z
+		.string()
+		.length(6, "suuid must be exactly 6 characters long")
+		.regex(/^[A-Za-z0-9]+$/, "suuid can only contain uppercase/lowercase letters and numbers"),
 });
 
 export const FrontendFlashcardSchema = FlashcardSchema.extend({
