@@ -14,3 +14,17 @@
 a.active {
 	color: rgb(232, 232, 141);
 }
+
+body {
+	opacity: 0;
+	animation: fadeIn .3s ease-in forwards;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
