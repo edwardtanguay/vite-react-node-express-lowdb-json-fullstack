@@ -12,6 +12,7 @@ export interface FlashcardModel {
 
 	// thunks
 	loadFlashcardsThunk: Thunk<this>;
+	toggleFrontendFlashcard: Thunk<this, FrontendFlashcard>;
 }
 
 export const flashcardModel: FlashcardModel = {
@@ -23,9 +24,12 @@ export const flashcardModel: FlashcardModel = {
 		state.frontendFlashcards = structuredClone(flashcards);
 	}),
 	saveFrontendFlashcard: action((state, frontendFlashcard) => {
-		const index = state.frontendFlashcards.findIndex((s) => s.suuid === frontendFlashcard.suuid);
+		const index = state.frontendFlashcards.findIndex(
+			(s) => s.suuid === frontendFlashcard.suuid
+		);
 		if (index !== -1) {
-			state.frontendFlashcards[index] = structuredClone(frontendFlashcard);
+			state.frontendFlashcards[index] =
+				structuredClone(frontendFlashcard);
 		}
 	}),
 
@@ -35,5 +39,9 @@ export const flashcardModel: FlashcardModel = {
 			const _frontendFlashcards = await dataModel.getFlashcards();
 			actions.setFrontendFlashcards(_frontendFlashcards);
 		})();
+	}),
+	toggleFrontendFlashcard: thunk((actions, frontendFlashcard) => {
+		frontendFlashcard.isOpen = !frontendFlashcard.isOpen;
+		actions.saveFrontendFlashcard(frontendFlashcard);
 	}),
 };

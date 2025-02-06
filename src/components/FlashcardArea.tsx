@@ -1,20 +1,12 @@
-import { FrontendFlashcard } from "../../share/types";
 import { useTypedStoreActions, useTypedStoreState } from "../store/hooks";
 
 export const FlashcardArea = () => {
 	const { frontendFlashcards } = useTypedStoreState(
 		(state) => state.flashcardModel
 	);
-	const { saveFrontendFlashcard } = useTypedStoreActions(
+	const { toggleFrontendFlashcard } = useTypedStoreActions(
 		(actions) => actions.flashcardModel
 	);
-
-	const handleToggleFrontendFlashcard = (
-		frontendFlashcard: FrontendFlashcard
-	) => {
-		frontendFlashcard.isOpen = !frontendFlashcard.isOpen;
-		saveFrontendFlashcard(frontendFlashcard);
-	};
 
 	return (
 		<div>
@@ -26,7 +18,7 @@ export const FlashcardArea = () => {
 					<div className="mb-4 w-full md:w-[35rem]">
 						<div
 							className="bg-slate-600 text-slate-200 p-2 rounded-t cursor-pointer"
-							onClick={() => handleToggleFrontendFlashcard(ff)}
+							onClick={() => toggleFrontendFlashcard(ff)}
 						>
 							{ff.front}
 						</div>
