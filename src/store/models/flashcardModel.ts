@@ -75,7 +75,7 @@ export const flashcardModel: FlashcardModel = {
 				helpers
 					.getStoreActions()
 					.mainModel.setMessage(
-						`Number of answers shown: ${
+						`Number of times an answer was shown: ${
 							helpers.getState().numberOfAnswersShown
 						}`
 					);

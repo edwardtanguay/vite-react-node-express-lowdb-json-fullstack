@@ -14,7 +14,7 @@ export interface MainModel {
 
 export const mainModel: MainModel = {
 	// state
-	message: '',
+	message: "",
 
 	// actions
 	setMessage: action((state, message) => {
@@ -23,8 +23,7 @@ export const mainModel: MainModel = {
 
 	// thunks
 	initialize: thunk((actions, _, helpers) => {
-		actions.setMessage('This is the welcome page.');
-		helpers.getStoreActions().flashcardModel.loadFlashcardsThunk()
-
+		actions.setMessage("Welcome to this site.");
+		helpers.getStoreActions().flashcardModel.loadFlashcardsThunk();
 	}),
 };
