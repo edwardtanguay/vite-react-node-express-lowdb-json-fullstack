@@ -1,18 +1,18 @@
 import axios from "axios";
-import { Flashcard, FlashcardSchema, FrontendFlashcard } from "../../share/types";
+import { FlashcardSchema, FrontendFlashcard } from "../../share/types";
 
 export const getFlashcards = async () => {
-	return new Promise<Flashcard[]>((resolve, reject) => {
+	return new Promise<FrontendFlashcard[]>((resolve, reject) => {
 		(async () => {
 			try {
 				const response = await axios.get(
 					"http://localhost:3300/api/flashcards"
 				);
 				if (response.status === 200) {
-					const _rawFlashcards: unknown[] = response.data;
-					const _flashcards: Flashcard[] = [];
-					for (const _rawFlashcard of _rawFlashcards) {
-						const parseResult = FlashcardSchema.safeParse(_rawFlashcard);
+					const _fetchedFlashcards: unknown[] = response.data;
+					const _frontendFlashcards: FrontendFlashcard[] = [];
+					for (const _fetchedFlashcard of _fetchedFlashcards) {
+						const parseResult = FlashcardSchema.safeParse(_fetchedFlashcard);
 						if (parseResult.success) {
 							const {suuid, category, front, back} =
 								parseResult.data;
@@ -23,11 +23,11 @@ export const getFlashcards = async () => {
 								back: back.trim(),
 								isOpen: false
 							};
-							_flashcards.push(_frontendFlashcard);
+							_frontendFlashcards.push(_frontendFlashcard);
 						} else {
 							let r = "";
 							r += `INVALID FLASHCARD IN IMPORT: ${JSON.stringify(
-								_rawFlashcard,
+								_fetchedFlashcard,
 								null,
 								2
 							)}\n`;
@@ -39,7 +39,7 @@ export const getFlashcards = async () => {
 							console.error(r);
 						}
 					}
-					resolve(_flashcards);
+					resolve(_frontendFlashcards);
 				}
 			} catch (e: unknown) {
 				reject(`ERROR: ${(e as Error).message}`);

@@ -1,12 +1,16 @@
 import { useTypedStoreState } from "../store/hooks";
 
 export const FlashcardArea = () => {
-	const { flashcards } = useTypedStoreState((state) => state.flashcardModel);
+	const { frontendFlashcards } = useTypedStoreState(
+		(state) => state.flashcardModel
+	);
 
 	return (
 		<div>
-			nnnThere are {flashcards.length} flashcards:{" "}
-			{flashcards.map((m) => m.suuid).join(", ")}
+			<h2 className="text-xl mb-2">
+				There are {frontendFlashcards.length} flashcards:{" "}
+			</h2>
+			{frontendFlashcards.length} flashcards
 		</div>
 	);
 };

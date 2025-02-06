@@ -1,13 +1,13 @@
 import { action, Action, thunk, Thunk } from "easy-peasy";
-import { Flashcard } from "../../../share/types";
+import { FrontendFlashcard } from "../../../share/types";
 import * as dataModel from "../dataModel";
 
 export interface FlashcardModel {
 	// state
-	flashcards: Flashcard[];
+	frontendFlashcards: FrontendFlashcard[];
 
 	// actions
-	setFlashcards: Action<this, Flashcard[]>;
+	setFrontendFlashcards: Action<this, FrontendFlashcard[]>;
 
 	// thunks
 	loadFlashcardsThunk: Thunk<this>;
@@ -15,18 +15,18 @@ export interface FlashcardModel {
 
 export const flashcardModel: FlashcardModel = {
 	// state
-	flashcards: [],
+	frontendFlashcards: [],
 
 	// actions
-	setFlashcards: action((state, flashcards) => {
-		state.flashcards = structuredClone(flashcards);
+	setFrontendFlashcards: action((state, flashcards) => {
+		state.frontendFlashcards = structuredClone(flashcards);
 	}),
 
 	// thunks
 	loadFlashcardsThunk: thunk((actions) => {
 		(async () => {
-			const _flashcards = await dataModel.getFlashcards();
-			actions.setFlashcards(_flashcards);
+			const _frontendFlashcards = await dataModel.getFlashcards();
+			actions.setFrontendFlashcards(_frontendFlashcards);
 		})();
 	}),
 };
