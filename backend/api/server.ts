@@ -13,10 +13,10 @@ app.get("/", (_req, res) => {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Virtual Medical Site Backend</title>
+        <title>Info Site</title>
     </head>
     <body>
-        <h1>Welcome to the Virtual Medical Site backend</h1>
+        <h1>Info Site</h1>
         <p>Version: <strong>1.1</strong></p>
     </body>
     </html>
