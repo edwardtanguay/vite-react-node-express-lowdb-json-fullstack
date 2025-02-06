@@ -4,9 +4,8 @@ export const FlashcardArea = () => {
 	const { frontendFlashcards } = useTypedStoreState(
 		(state) => state.flashcardModel
 	);
-	const { toggleFrontendFlashcard } = useTypedStoreActions(
-		(actions) => actions.flashcardModel
-	);
+	const { toggleFrontendFlashcardThunk, deleteFlashcardFromDatasourceThunk } =
+		useTypedStoreActions((actions) => actions.flashcardModel);
 
 	return (
 		<div>
@@ -18,7 +17,7 @@ export const FlashcardArea = () => {
 					<div className="mb-4 w-full md:w-[35rem]">
 						<div
 							className="bg-slate-600 text-slate-200 p-2 rounded-t cursor-pointer"
-							onClick={() => toggleFrontendFlashcard(ff)}
+							onClick={() => toggleFrontendFlashcardThunk(ff)}
 						>
 							{ff.front}
 						</div>
@@ -29,7 +28,7 @@ export const FlashcardArea = () => {
 								</p>
 								<button
 									className="btn-small"
-									onClick={() => alert("clicked")}
+									onClick={() => deleteFlashcardFromDatasourceThunk(ff)}
 								>
 									Delete
 								</button>
