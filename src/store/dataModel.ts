@@ -1,5 +1,6 @@
 import axios from "axios";
 import { FlashcardSchema, FrontendFlashcard } from "../../share/types";
+import { DataModelResponse } from "./types";
 
 export const getFlashcards = async () => {
 	return new Promise<FrontendFlashcard[]>((resolve, reject) => {
@@ -49,4 +50,27 @@ export const getFlashcards = async () => {
 	});
 };
 
-export const deleteFlashcard = async () => {};
+export const deleteFlashcard = async (suuid: string) => {
+	return new Promise<DataModelResponse>((resolve, reject) => {
+		(async () => {
+			try {
+				const response = await axios.delete(
+					`http://localhost:3300/api/flashcards/${suuid}`
+				);
+				if (response.status === 200) {
+					resolve({
+						message: `flashcard ${suuid} deleted successfully`,
+						success: true,
+					});
+				} else {
+					resolve({
+						message: `failed to delete flashcard ${suuid}`,
+						success: false,
+					});
+				}
+			} catch (e: unknown) {
+				reject(new Error(`ERROR: ${(e as Error).message}`));
+			}
+		})();
+	});
+};

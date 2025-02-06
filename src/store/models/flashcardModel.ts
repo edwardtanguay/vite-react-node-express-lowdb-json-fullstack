@@ -1,7 +1,6 @@
 import { action, Action, thunk, Thunk } from "easy-peasy";
 import { FrontendFlashcard } from "../../../share/types";
 import * as dataModel from "../dataModel";
-import axios from "axios";
 
 export interface FlashcardModel {
 	// state
@@ -58,23 +57,18 @@ export const flashcardModel: FlashcardModel = {
 	deleteFlashcardFromDatasourceThunk: thunk(
 		async (actions, frontendFlashcard) => {
 			try {
-				const response = await axios.delete(
-					`http://localhost:3300/api/flashcards/${frontendFlashcard.suuid}`
+				const dataModelResponse = await dataModel.deleteFlashcard(
+					frontendFlashcard.suuid
 				);
-				if (response.status === 200) {
+				if (dataModelResponse.success) {
 					actions.deleteFrontendFlashcard(frontendFlashcard);
-					console.log(
-						`flashcard ${frontendFlashcard.suuid} deleted successfully`
-					);
+					console.log(dataModelResponse.message);
 				} else {
-					console.error(
-						`failed to delete flashcard ${frontendFlashcard.suuid}`
-					);
+					console.error(dataModelResponse.message);
+					// display message to user
 				}
-			} catch (error) {
-				console.error(
-					`failed to delete flashcard ${frontendFlashcard.suuid}`
-				);
+			} catch (e: unknown) {
+				console.error((e as Error).message);
 			}
 		}
 	),
