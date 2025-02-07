@@ -10,6 +10,10 @@ In the frontend, easy-peasy Redux is used for straight-forward state management,
 
 ![410639506-10c50665-8ea6-482d-b0a2-3f3e68c71dbd](https://github.com/user-attachments/assets/84d8fe35-8aa7-44b9-a07a-f25c2de94b80)
 
+## Video explaining how to set up this template and how e.g. the backend, easy-peasy Redux and Zod works
+
+[![grafik](https://github.com/user-attachments/assets/09c005d8-60f3-43a2-8691-6f958d28f2fb)](https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=pnfAGFCX8_o)
+
 ## frontend
 
 -   Vite React
