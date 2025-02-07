@@ -12,7 +12,7 @@ In the frontend, easy-peasy Redux is used for straight-forward state management,
 
 ## Video explaining how to set up this template and how e.g. the backend, easy-peasy Redux and Zod works
 
-[![grafik](https://github.com/user-attachments/assets/09c005d8-60f3-43a2-8691-6f958d28f2fb)](https://www.youtube.com/watch?v=pnfAGFCX8_o)
+[![grafik](https://github.com/user-attachments/assets/7ec6ba8c-2e0c-43e3-b3a1-afb2b1a62db0)](https://www.youtube.com/watch?v=pnfAGFCX8_o)
 
 ## frontend
 
