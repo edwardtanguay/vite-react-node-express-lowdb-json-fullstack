@@ -37,3 +37,8 @@ In the frontend, easy-peasy Redux is used for straight-forward state management,
 
 -   `npm i`
 -   `npm run dev` - _starts both backend and frontend_
+
+## ports
+
+- frontend: 3200
+- backend: 3300
